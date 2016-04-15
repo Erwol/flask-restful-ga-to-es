@@ -7,22 +7,22 @@ api = Api(app)
 DICTIONARY = [
     {
         'id': 1,
-        'ca': u'Oju',
+        'ga': u'Oju',
         'es': u'Vaya'
     },
     {
         'id': 2,
-        'ca': u'Bastinazo',
+        'ga': u'Bastinazo',
         'es': u'Tremendo'
     },
     {
         'id': 3,
-        'ca': u'Killo',
+        'ga': u'Killo',
         'es': u'Cabesa'
     },
     {
         'id': 4,
-        'ca': u'Pixa',
+        'ga': u'Pixa',
         'es': u'Conocido'
     }
 
@@ -36,9 +36,9 @@ def get_words():
 
 
 # Conversión de una palabra en gaditano a español
-@app.route('/ga_es/<string:p_ca>', methods=['GET'])
-def get_word_es(p_ca):
-    p_es = [palabra for palabra in DICTIONARY if palabra['ca'] == p_ca]
+@app.route('/ga_es/<string:p_ga>', methods=['GET'])
+def get_word_es(p_ga):
+    p_es = [palabra for palabra in DICTIONARY if palabra['ga'] == p_ga]
     if len(p_es) == 0:
         abort(404)
     return jsonify({'palabra': p_es[0]['es']})
@@ -49,7 +49,7 @@ def get_word_ga(p_es):
     p_ga = [palabra for palabra in DICTIONARY if palabra['es'] == p_es]
     if len(p_ga) == 0:
         abort(404)
-    return jsonify({'palabra': p_ga[0]['ca']})
+    return jsonify({'palabra': p_ga[0]['ga']})
 
 # Eliminar entrada dada una id
 @app.route('/palabra/<int:palabra_id>', methods=['DELETE'])
@@ -63,11 +63,11 @@ def delete_word(palabra_id):
 # Crear una nueva palabra
 @app.route('/palabras', methods=['POST'])
 def create_word():
-    if not request.json or not 'ca' in request.json:
+    if not request.json or not 'ga' in request.json:
         abort(400)
     palabra = {
         'id': DICTIONARY[-1]['id'] + 1,
-        'ca': request.json['ca'],
+        'ga': request.json['ga'],
         'es': request.json['es'],
     }
     DICTIONARY.append(palabra)
@@ -85,7 +85,7 @@ def update_word(palabra_id):
         abort(400)
     if 'es' in request.json and type(request.json['es']) is not unicode:
         abort(400)
-    if 'ca' in request.json and type(request.json['es']) is not unicode:
+    if 'ga' in request.json and type(request.json['es']) is not unicode:
         abort(400)
     palabra[0]['es'] = request.json['es']
     palabra[0]['ga'] = request.json['ga']
