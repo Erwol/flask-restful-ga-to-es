@@ -41,7 +41,18 @@ while res != 0:
 
         # curl -i -H "Content-Type: application/json" -X POST -d '{"es":"hola", "ga":"q ase"}' http://localhost:5000/palabras
         orden = 'curl -i -H ' + '"Content-Type: application/json" -X POST -d ' + "'" + palabra + "'" + " http://localhost:5000/palabras"
-        print orden
         os.system(orden)
 
-    # else if res == 5:
+    elif res == 5:
+        print "Introduce la id de la entrada del diccionario a modificar: "
+        id = raw_input()
+        print "Introduce la palabra en castellano: "
+        es = raw_input()
+        print "Introduce la traducción de " + es + " al gaditano: "
+        ga = raw_input()
+        palabra = '{"es":"' + es + '", "ga":"' + ga + '"}'
+        # erwol@teseracto:~$ curl -i -H "Content-Type: application/json" -X PUT -d '{"es":"fg", "ga":"ggf"}' http://localhost:5000/palabras/1
+
+        orden = 'curl -i -H ' + '"Content-Type: application/json" -X PUT -d ' + "'" + palabra + "'" + " http://localhost:5000/palabras/" + id
+        print orden
+        os.system(orden)

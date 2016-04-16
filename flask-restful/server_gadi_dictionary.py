@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 from flask import Flask
 from flask_restful import reqparse, abort, Api, Resource
@@ -5,15 +6,33 @@ from flask_restful import reqparse, abort, Api, Resource
 app = Flask(__name__)
 api = Api(app)
 
-TODOS = {
-    'todo1': {'task': 'build an API'},
-    'todo2': {'task': '?????'},
-    'todo3': {'task': 'profit!'},
-}
+DICTIONARY = [
+    {
+        'id': 1,
+        'ga': u'Oju',
+        'es': u'Vaya'
+    },
+    {
+        'id': 2,
+        'ga': u'Bastinazo',
+        'es': u'Tremendo'
+    },
+    {
+        'id': 3,
+        'ga': u'Killo',
+        'es': u'Cabesa'
+    },
+    {
+        'id': 4,
+        'ga': u'Pixa',
+        'es': u'Conocido'
+    }
+
+]
 
 
-def abort_if_todo_doesnt_exist(todo_id):
-    if todo_id not in TODOS:
+def id_palabra_no_existe(palabra_id):
+    if palabra_id not in DICTIONARY:
         abort(404, message="Todo {} doesn't exist".format(todo_id))
 
 parser = reqparse.RequestParser()

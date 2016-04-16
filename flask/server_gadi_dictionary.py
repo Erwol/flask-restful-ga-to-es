@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-from flask_restful import reqparse, abort, Api, Resource
-from flask import Flask, jsonify, abort, request, make_response
+from flask import Flask, jsonify
+from flask import abort
+from flask import make_response
+from flask import request
+
 app = Flask(__name__)
-api = Api(app)
 
 DICTIONARY = [
     {
